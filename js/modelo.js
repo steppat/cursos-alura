@@ -46,11 +46,7 @@ function Relacao(_primeiroCurso, _segundoCurso, _options) {
 
     this.getNome = function() {
         return nome;
-    }
-
-    this.getLength = function() {
-        return length;
-    }
+    }  
 
     this.getStyle = function() {
         return style;
@@ -60,6 +56,35 @@ function Relacao(_primeiroCurso, _segundoCurso, _options) {
         return this.getSource().getNome() + " " 
                 + this.getNome() + " " 
                   + this.getTarget().getNome(); 
+    }
+}
+
+function RelacaoCursoTrilha(_primeiroCurso, _segundoCurso) {
+    "use strict"
+
+    var primeiroCurso = _primeiroCurso;
+    var segundoCurso  = _segundoCurso;
+    var relacao = new Relacao(primeiroCurso, segundoCurso);
+
+    //delegando, nao sei fazer melhor
+    this.getTarget = function() {
+        return relacao.getTarget();
+    }
+
+    this.getSource = function() {
+        return relacao.getSource();
+    }
+
+    this.getNome = function() {
+        return relacao.getNome();
+    }
+
+    this.getStyle = function() {
+        return 'dash-line';
+    }
+
+    this.toString = function() {
+        return relacao.toString();
     }
 }
 
@@ -209,7 +234,6 @@ function ModeloGrafico() {
           from:   relacao.getSource().getId(),
           to:     relacao.getTarget().getId(),
           label:  relacao.getNome(),
-          length: relacao.getLength(),
           style:  relacao.getStyle(),
           color:  'gray'
       });

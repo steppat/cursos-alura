@@ -118,10 +118,7 @@ function draw(trilhas) {
             fontSize: 10,
             fontFace: "Tahoma"
             },
-        edges: {
-          width: 1,
-          style: 'line',
-        },
+        
         tooltip: {
             delay: 200,
             fontSize: 12,
@@ -204,6 +201,7 @@ function draw(trilhas) {
   network.on('select', function(params) {
         var id = params.nodes;
         var curso = modelo.buscaCursoPelaId(id);
+        if(curso == null) return;
         document.getElementById('selection').innerHTML = 
             '<br />' + curso.getNome() + '<br />' + curso.getInfo();
       });

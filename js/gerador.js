@@ -3,9 +3,6 @@ function GeradorTrilhas() {
 
   var id = 1;
 
-  var opcoesRelacao = {length: 200, style: 'dash-line', nome: ""};
-
-
   var cursoLogica   = new Curso(id++, "Lógica de Programação" );
   var cursoPraticandoLogica   = new Curso(id++, "Praticando Lógica \nde Programação");
   var cursoBancoSql = new Curso(id++, "Banco De Dados \nE SQL"); 
@@ -36,10 +33,10 @@ function GeradorTrilhas() {
 
       var trilhaJava = new Trilha("Trilha Java", {group: 'java'});
       trilhaJava.adicionaRelacoes([
-            new Relacao(javaPP, cursoPraticandoLogica,  opcoesRelacao),
+            new RelacaoCursoTrilha(javaPP, cursoPraticandoLogica),
             new Relacao(javaOO, javaPP),
             new Relacao(cursoJavaBibliotecas, javaOO),
-            new Relacao(cursoJavaBancoDeDados, cursoBancoSql, {length: 200, style: 'dash-line', nome: ""}),
+            new RelacaoCursoTrilha(cursoJavaBancoDeDados, cursoBancoSql),
             new Relacao(cursoJavaBancoDeDados, cursoJavaBibliotecas),
             new Relacao(cursoJavaDesignPattern, cursoJavaBibliotecas),
             new Relacao(javaEclipse, cursoJavaBibliotecas),
@@ -59,12 +56,12 @@ function GeradorTrilhas() {
   this.geraTrilhaJavaWeb = function() {
       var trilhaJavaWeb = new Trilha("Trilha Java para Web", {group: 'java_web'});
       trilhaJavaWeb.adicionaRelacoes([
-          new Relacao(cursoServlet, cursoJavaBibliotecas, opcoesRelacao),
-          new Relacao(cursoServlet, cursoPrimeirosPassosHtmlCss, opcoesRelacao),
-          new Relacao(vraptor3, cursoServlet, opcoesRelacao),
+          new RelacaoCursoTrilha(cursoServlet, cursoJavaBibliotecas),
+          new RelacaoCursoTrilha(cursoServlet, cursoPrimeirosPassosHtmlCss),
+          new RelacaoCursoTrilha(vraptor3, cursoServlet),
           new Relacao(jstl, cursoServlet),
           new Relacao(vraptor4, vraptor3),
-          new Relacao(cursoJpa, cursoJavaBancoDeDados, opcoesRelacao),
+          new RelacaoCursoTrilha(cursoJpa, cursoJavaBancoDeDados),
           new Relacao(cursoJsf, cursoServlet),
           new Relacao(springMVC, cursoServlet),
 
@@ -88,19 +85,19 @@ function GeradorTrilhas() {
 
       var trilhaJavaAvancado = new Trilha("Trilha Java Avancado", {group: "java_avancado"});
       trilhaJavaAvancado.adicionaRelacoes([
-          new Relacao(cursoOOAprimorando, cursoJavaDesignPattern, opcoesRelacao),
+          new RelacaoCursoTrilha(cursoOOAprimorando, cursoJavaDesignPattern),
           new Relacao(dp2, cursoOOAprimorando),
-          new Relacao(jasper, cursoServlet, opcoesRelacao),
-          new Relacao(xstream, cursoJavaBibliotecas, opcoesRelacao),
-          new Relacao(ant, cursoServlet, {length: 200, style: 'dash-line', nome: ""}),
+          new RelacaoCursoTrilha(jasper, cursoServlet),
+          new RelacaoCursoTrilha(xstream, cursoJavaBibliotecas),
+          new RelacaoCursoTrilha(ant, cursoServlet),
           new Relacao(ivy, ant),
           new Relacao(maven, ivy),
-          new Relacao(rest, cursoServlet, opcoesRelacao),
+          new RelacaoCursoTrilha(rest, cursoServlet),
           new Relacao(rest, xstream),
           new Relacao(solid, dp2),
-          new Relacao(ejb, cursoJpa, opcoesRelacao),
+          new RelacaoCursoTrilha(ejb, cursoJpa),
           new Relacao(projetoJavaEE, ejb),
-          new Relacao(projetoJavaEE, cursoJsf, opcoesRelacao)
+          new RelacaoCursoTrilha(projetoJavaEE, cursoJsf)
       ]);
       return trilhaJavaAvancado;
   }
@@ -118,7 +115,7 @@ function GeradorTrilhas() {
 
       var trilhaJavaCertificacao = new Trilha("Trilha Certificação Java", {group: "java_certificao"});
       trilhaJavaCertificacao.adicionaRelacoes([
-          new Relacao(cert1, cursoJavaBibliotecas, opcoesRelacao),
+          new RelacaoCursoTrilha(cert1, cursoJavaBibliotecas),
           new Relacao(cert2, cert1),
           new Relacao(cert3, cert2),
           new Relacao(cert4, cert3),
@@ -146,7 +143,7 @@ function GeradorTrilhas() {
 
       var trilhaFront = new Trilha("Trilha HTML e Front End", {group: "front_end"});
       trilhaFront.adicionaRelacoes([
-          new Relacao(introHtml, cursoPrimeirosPassosHtmlCss, opcoesRelacao),
+          new RelacaoCursoTrilha(introHtml, cursoPrimeirosPassosHtmlCss),
           new Relacao(cursoJavaScript, introHtml),
           new Relacao(cursoAvancandoNoHtmlCss, cursoJavaScript),
           new Relacao(jquery, cursoJavaScript),
@@ -172,13 +169,13 @@ function GeradorTrilhas() {
   this.geraTrilhaTestesSoftware = function() {
       var trilhaTestes = new Trilha("Trilha Testes de Software", {group: "testes"});
       trilhaTestes.adicionaRelacoes([
-            new Relacao(tdd, cursoOOAprimorando, opcoesRelacao),
+            new RelacaoCursoTrilha(tdd, cursoOOAprimorando),
             new Relacao(mocks, tdd),
             new Relacao(testDao, mocks),
-            new Relacao(testDao, cursoJavaBancoDeDados, opcoesRelacao),
+            new RelacaoCursoTrilha(testDao, cursoJavaBancoDeDados),
             new Relacao(selenium, mocks),
-            new Relacao(selenium, cursoAvancandoNoHtmlCss, opcoesRelacao),
-            new Relacao(jasmine, cursoJavaScript, opcoesRelacao)
+            new RelacaoCursoTrilha(selenium, cursoAvancandoNoHtmlCss),
+            new RelacaoCursoTrilha(jasmine, cursoJavaScript)
       ]);
       return trilhaTestes;
   }
@@ -197,12 +194,12 @@ function GeradorTrilhas() {
       trilhaInfra.adicionaRelacoes([
             new Relacao(linux2, linux1),
             new Relacao(vagrant, linux2),  
-            new Relacao(vagrant, cursoServlet,  opcoesRelacao),
-            new Relacao(vagrant, cursoBancoSql,  opcoesRelacao),
+            new RelacaoCursoTrilha(vagrant, cursoServlet),
+            new RelacaoCursoTrilha(vagrant, cursoBancoSql),
             new Relacao(vagrant, ec2),
             new Relacao(jenkins, git),       
-            new Relacao(jenkins, maven, opcoesRelacao),
-            new Relacao(jenkins, selenium, opcoesRelacao)     
+            new RelacaoCursoTrilha(jenkins, maven),
+            new RelacaoCursoTrilha(jenkins, selenium)     
       ]);
       return trilhaInfra;
   }
@@ -222,12 +219,12 @@ function GeradorTrilhas() {
   this.geraTrilhaCSharp = function() {
      var trilhaCSharp = new Trilha(" Trilha C# e .NET", {group: "csharp"});
       trilhaCSharp.adicionaRelacoes([
-            new Relacao(csharpFund, cursoPrimeirosPassosHtmlCss, opcoesRelacao),
+            new RelacaoCursoTrilha(csharpFund, cursoPrimeirosPassosHtmlCss),
             new Relacao(csharpOO, csharpFund),  
             new Relacao(csharpAvanc, csharpOO),
-            new Relacao(entityFr, cursoBancoSql, opcoesRelacao),
+            new RelacaoCursoTrilha(entityFr, cursoBancoSql),
             new Relacao(entityFr, csharpAvanc),
-            new Relacao(nhibernate, cursoBancoSql, opcoesRelacao),
+            new RelacaoCursoTrilha(nhibernate, cursoBancoSql),
             new Relacao(nhibernate, csharpAvanc),
             new Relacao(aspMvc, csharpAvanc),       
             new Relacao(razor, aspMvc),
@@ -249,7 +246,7 @@ function GeradorTrilhas() {
   this.geraTrilhaAndroid = function() {
           var trilhaAndroid = new Trilha(" Trilha Android", {group: "android"});
       trilhaAndroid.adicionaRelacoes([
-              new Relacao(android1, cursoJavaBibliotecas,opcoesRelacao), 
+              new RelacaoCursoTrilha(android1, cursoJavaBibliotecas), 
               new Relacao(android2, android1),
               new Relacao(android3, android2),
               new Relacao(android4, android3)
@@ -265,7 +262,7 @@ function GeradorTrilhas() {
   this.geraTrilhaIos = function() {
      var trilhaIos = new Trilha("Trilha iOS", {group: "ios"})
       trilhaIos.adicionaRelacoes([
-              new Relacao(swift1, cursoPraticandoLogica,opcoesRelacao),  
+              new RelacaoCursoTrilha(swift1, cursoPraticandoLogica),  
               new Relacao(swift2, swift1),
               new Relacao(swift3, swift2)
       ]);
@@ -298,7 +295,7 @@ function GeradorTrilhas() {
   this.geraTrilhaRails = function() {
     var trilhaRails = new Trilha("Trilha Ruby e Rails", {group: "ruby"});
     trilhaRails.adicionaRelacoes([
-            new Relacao(rails1, cursoPrimeirosPassosHtmlCss, opcoesRelacao), 
+            new RelacaoCursoTrilha(rails1, cursoPrimeirosPassosHtmlCss), 
             new Relacao(rails2, rails1),
             new Relacao(rails3, rails2),
             new Relacao(rubyOO, rails1)
@@ -315,7 +312,7 @@ function GeradorTrilhas() {
   this.geraTrilhaPhp = function() {
      var trilhaPhp = new Trilha("Trilha PHP", {group: "php"});
       trilhaPhp.adicionaRelacoes([
-              new Relacao(php1, cursoPrimeirosPassosHtmlCss, opcoesRelacao), 
+              new RelacaoCursoTrilha(php1, cursoPrimeirosPassosHtmlCss), 
               new Relacao(php2, php1),
               new Relacao(codeIgniter, php2),
               new Relacao(codeIgniter2, codeIgniter)
