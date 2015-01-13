@@ -1,10 +1,13 @@
 //nao sei javascript, é tudo java!
-function Curso(_id, _nome) {
+function Curso(_id, _nome, _infos) {
   "use strict"
-
+  
   var id = _id;
   var nome = _nome;
-  
+  var infos = _infos || {};
+  var qtdVideos = infos.v || 0;
+  var qtdCapitulos = infos.c || 0;
+  var qtdExercicios = infos.e || 0;
 
   this.getId = function() {
     return id;
@@ -15,7 +18,9 @@ function Curso(_id, _nome) {
   }
 
   this.getInfo = function() {
-    return "20hs, 6 Seções, 34 Exercicios"; //TODO: deve ser dinamico 
+    return "" + qtdVideos + " Vídeos, " +
+          qtdCapitulos + " Capítulos, " +
+            qtdExercicios + " Exercícios";  
   }
 
   this.toString = function() {
@@ -221,7 +226,7 @@ function ModeloGrafico() {
          graph.nodes.push({
           id:     curso.getId(),
           label:  curso.getNome(),
-          title:  curso.getNome() + ", " + trilha.getNome(),
+          title:  curso.getNome() + ": " + curso.getInfo(),
           shape:  'image',
           image: 'img/start.png'
         });
@@ -229,7 +234,7 @@ function ModeloGrafico() {
         graph.nodes.push({
             id:     curso.getId(),
             label:  curso.getNome(),
-            title:  curso.getNome() + ", " + trilha.getNome(),
+            title:  curso.getNome() + ": " + curso.getInfo(),
             group:  trilha.getGroup()
         });
       }
@@ -244,7 +249,6 @@ function ModeloGrafico() {
           label:  relacao.getNome(),
           style:  relacao.getStyle(),
           length: relacao.getLength(),
-
           color:  'gray'
       });
     }

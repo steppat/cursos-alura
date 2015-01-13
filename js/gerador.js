@@ -1,13 +1,13 @@
-//Big Ball of Mud
+  //Big Ball of Mud
 function GeradorTrilhas() {
 
   var id = 1;
 
-  var cursoLogica   = new Curso(id++, "Lógica de Programação" );
-  var cursoPraticandoLogica   = new Curso(id++, "Praticando Lógica \nde Programação");
-  var cursoBancoSql = new Curso(id++, "Banco De Dados \nE SQL"); 
-  var cursoBancoSqlComplexo = new Curso(id++, "Banco De Dados \nE SQL Complexas"); 
-  var cursoPrimeirosPassosHtmlCss = new Curso(id++, "Primeiros passos com \nHTML e CSS");
+  var cursoLogica   = new Curso(id++, "Lógica de Programação", {v: 6, c: 7, e: 44});
+  var cursoPraticandoLogica   = new Curso(id++, "Praticando Lógica \nde Programação", {v: 4, c: 5, e: 17});
+  var cursoBancoSql = new Curso(id++, "Banco De Dados \nE SQL", {v: 6, c: 6, e: 46}); 
+  var cursoBancoSqlComplexo = new Curso(id++, "Banco De Dados \nE SQL Complexas", {v: 5, c: 5, e: 39}); 
+  var cursoPrimeirosPassosHtmlCss = new Curso(id++, "Primeiros passos com \nHTML e CSS", {v: 7, c: 7, e: 28});
 
   this.geraTrilhaPrimeirosPassos = function() {
       var trilhaPrimeirosPassos = new Trilha("Trilha Primeiros Passos", {group: "primerios_passos"});
@@ -127,17 +127,17 @@ function GeradorTrilhas() {
       return trilhaJavaCertificacao;
   }
 
-  var cursoJavaScript = new Curso(id++, "Javascript");
-  var cursoAvancandoNoHtmlCss = new Curso(id++, "Avançando No \nHTML E CSS");
-  var introHtml   = new Curso(id++, "Introdução A \nHTML E CSS");    
-  var jquery      = new Curso(id++, "Introdução \nAo JQuery");
-  var jquery2     = new Curso(id++, "JQuery Parte 2: Manipulação \nDinâmica De Conteúdo");
-  var responsivo  = new Curso(id++, "Web Design \nResponsivo");
-  var chart       = new Curso(id++, "Gráficos Com \nGoogle Chart Tools");
-  var angular     = new Curso(id++, "AngularJS");
-  var grunt       = new Curso(id++, "Automação De \nTarefas Com Grunt");
-  var less        = new Curso(id++, "Introdução \nAo LESS");
-  var mean        = new Curso(id++, "Introdução \nMEAN Stack");
+  var introHtml   = new Curso(id++, "Introdução A \nHTML E CSS", {v: 12, c: 12, e: 98});    
+  var cursoJavaScript = new Curso(id++, "Javascript", {v: 7, c: 7, e: 40});
+  var cursoAvancandoNoHtmlCss = new Curso(id++, "Avançando No \nHTML E CSS", {v: 14, c: 14, e: 110});
+  var jquery      = new Curso(id++, "Introdução \nAo JQuery", {v: 5, c: 5, e: 34});
+  var jquery2     = new Curso(id++, "JQuery Parte 2: Manipulação \nDinâmica De Conteúdo", {v: 8, c: 8, e: 37});
+  var responsivo  = new Curso(id++, "Web Design \nResponsivo", {v: 8, c: 8, e: 45});
+  var chart       = new Curso(id++, "Gráficos Com \nGoogle Chart Tools", {v: 6, c: 6, e: 19});
+  var angular     = new Curso(id++, "AngularJS", {v: 6, c: 6, e: 30});
+  var grunt       = new Curso(id++, "Automação De \nTarefas Com Grunt", {v: 7, c: 7, e: 22});
+  var less        = new Curso(id++, "Introdução \nAo LESS", {v: 5, c: 5, e: 18});
+  var mean        = new Curso(id++, "Introdução \nMEAN Stack", {v: 7, c: 6, e: 33});
 
   this.geraTrilhaFrontEnd = function() {
 
