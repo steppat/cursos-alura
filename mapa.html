@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+<head>
+  <title>Alura - Mapa dos cursos</title>
+  <meta charset="UTF-8">
+
+  <script src="js/modelo.js"></script>
+  <script src="js/gerador.js"></script>
+  <script type="text/javascript" src="js/vis.min.js"></script>
+
+  <link href="css/vis.css" rel="stylesheet" type="text/css" />
+
+  <style type="text/css">
+    #treinamentos {
+      width: 800px;
+      height: 500px;
+      border: 1px solid lightgray;
+      background: #EEEEEE;
+    }
+  </style>
+</head>
+
+<body onload="init(); return false;">
+
+<h3>Cursos Alura</h3>
+
+<div id="mapa" style="width: 100%; overflow: hidden;">
+
+
+  <div id="menu" style="width: 200px; float: left;" >
+    <b>Eu quero me tornar um:</b>
+    <form onsubmit="submitForm(); return false;">
+      <input type="radio" name="trilha" value="front"  onclick="submitForm(); return true;"> 
+      Desenvolvedor Front-End
+      <br />
+
+      <input type="radio" name="trilha" value="mobile"  onclick="submitForm(); return true;"> 
+      Desenvolvedor Mobile
+      <br />
+
+      <input type="radio" name="trilha" value="java"  onclick="submitForm(); return true;"> 
+      Desenvolvedor Java
+      <br />
+
+      <input type="radio" name="trilha" value="ninja"  onclick="submitForm(); return true;"> 
+      Desenvolvedor Java Ninja
+      <br />
+
+      <input type="radio" name="trilha" value="cert"  onclick="submitForm(); return true;">
+      Certificação Java
+      <br />
+
+      <input type="radio" name="trilha" value="php"  onclick="submitForm(); return true;"> 
+      Desenvolvedor PHP
+      <br />
+
+      <input type="radio" name="trilha" value="net"  onclick="submitForm(); return true;"> 
+      Desenvolvedor .NET
+            <br />
+
+      <input type="radio" name="trilha" value="rails"  onclick="submitForm(); return true;"> 
+      Desenvolvedor Rails
+      <br />
+
+      <input type="radio" name="trilha" value="todos"  onclick="submitForm(); return true;" >
+      Todos os Cursos 
+      <br /> 
+    </form>
+    <div id="selection"><br />Info:</div>
+  </div>
+  <div id="treinamentos" style="margin-left: 200px;"></div>
+
+</div>
+
+<script type="text/javascript">
+
+var gerador = new GeradorTrilhas();
+
+function submitForm() {
+
+  var radios = document.getElementsByName('trilha');
+
+  for (var i = 0, length = radios.length; i < length; i++) {
+      if (radios[i].checked) {
+          // do whatever you want with the checked radio
+          var nomeTrilha = radios[i].value;
+          var trilhas = gerador.geraTrilhas(nomeTrilha);
+          draw(trilhas);
+          break;
+      }
+  }
+}
+
+function init() {
+  //var trilhas = gerador.getTodasAsTrilhas();
+  //draw(trilhas);
+}
+
+function draw(trilhas) {
+
+  var modelo = new ModeloGrafico();
+  modelo.adicionaTrilhas(trilhas);
+
+  //vis graph stuff
+  //exemplos:
+  //http://visjs.org/#gallery
+  //https://github.com/almende/vis/blob/master/examples/network/23_hierarchical_layout.html
+  var container = document.getElementById('treinamentos');
+  var data = modelo.getData();
+  //var mynetwork = document.getElementById('treinamentos');
+  // var x = - mynetwork.clientWidth / 2 - 50;
+  //var y = - mynetwork.clientHeight / 2 + 100;
+  //data.nodes.push({id: 1000, x: x, y: y, label: 'Pode arrastar e mexer', value: 10, mass:0});
+
+  var options = {
+        nodes: {
+            shape: 'box',
+            fontSize: 10,
+            fontFace: "Tahoma"
+            },
+        edges: {
+          width: 1,
+          style: 'line',
+        },
+        tooltip: {
+            delay: 200,
+            fontSize: 12,
+            color: {
+                background: "#fff"
+                }
+            },
+        stabilize: false,
+        smoothCurves: {dynamic:false, type: "continuous"},
+        physics: {barnesHut: {gravitationalConstant: -2000, springConstant: 0.01, springLength: 25}},
+        hideEdgesOnDrag: false,
+                legend: {right: {position: 'top-left'}},
+
+        groups: {
+          'ios': {
+            shape: 'image',
+            image: 'img/ios.png'
+          },
+          'android': {
+            shape: 'image',
+            image: 'img/android.png'
+          },
+          'primerios_passos': {
+            shape: 'image',
+            image: 'img/pp.png'
+          },
+          'agil': {
+            shape: 'image',
+            image: 'img/agil.png'
+          },
+          'infra': {
+            shape: 'image',
+            image: 'img/infra.png'
+          },
+          'java_web': {
+            shape: 'image',
+            image: 'img/java-web.png'
+          },
+          'java': {
+            shape: 'image',
+            image: 'img/java.png'
+          },
+          'testes': {
+            shape: 'image',
+            image: 'img/testes.png'
+          },
+          'front_end': {
+            shape: 'image',
+            image: 'img/front.png'
+          },
+          'java_avancado': {
+            shape: 'image',
+            image: 'img/java-av.png'
+          },
+          'java_certificao': {
+            shape: 'image',
+            image: 'img/cert.png' 
+          },
+          'csharp': {
+            shape: 'image',
+            image: 'img/csharp.png'
+          },
+          'ruby': {
+            shape: 'image',
+            image: 'img/rails.png'
+          },
+          'php': {
+            shape: 'image',
+            image: 'img/php.png'
+          },
+
+          nodes: {
+            widthMin: 20,  // min width in pixels
+            widthMax: 100  // max width in pixels
+          },
+        }//groups
+      };
+
+  var network = new vis.Network(container, data, options);
+  network.on('select', function(params) {
+        var id = params.nodes;
+        var curso = modelo.buscaCursoPelaId(id);
+        document.getElementById('selection').innerHTML = 
+            '<br />' + curso.getNome() + '<br />' + curso.getInfo();
+      });
+}
+</script>
+
+</body>
+</html>
+
