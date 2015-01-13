@@ -15,7 +15,7 @@ function Curso(_id, _nome) {
   }
 
   this.getInfo = function() {
-    return "20hs, 6 Seções, 34 Exercicios, Alemanha 7 x 1 Brasil"; //TODO: deve ser dinamico 
+    return "20hs, 6 Seções, 34 Exercicios"; //TODO: deve ser dinamico 
   }
 
   this.toString = function() {
