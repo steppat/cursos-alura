@@ -48,6 +48,10 @@ function Relacao(_primeiroCurso, _segundoCurso, _options) {
         return nome;
     }  
 
+    this.getLength = function() {
+        return length;
+    }
+
     this.getStyle = function() {
         return style;
     }
@@ -78,7 +82,11 @@ function RelacaoCursoTrilha(_primeiroCurso, _segundoCurso) {
     this.getNome = function() {
         return relacao.getNome();
     }
-
+    
+    this.getLength = function() {
+        return 130;
+    }
+    
     this.getStyle = function() {
         return 'dash-line';
     }
@@ -222,7 +230,7 @@ function ModeloGrafico() {
             id:     curso.getId(),
             label:  curso.getNome(),
             title:  curso.getNome() + ", " + trilha.getNome(),
-            group:  trilha.getGroup(),
+            group:  trilha.getGroup()
         });
       }
     }
@@ -235,6 +243,8 @@ function ModeloGrafico() {
           to:     relacao.getTarget().getId(),
           label:  relacao.getNome(),
           style:  relacao.getStyle(),
+          length: relacao.getLength(),
+
           color:  'gray'
       });
     }
