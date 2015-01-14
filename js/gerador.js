@@ -10,6 +10,7 @@ function GeradorTrilhas() {
   var cursoPrimeirosPassosHtmlCss = new Curso(id++, "Primeiros passos com \nHTML e CSS", {v: 7, c: 7, e: 28});
 
   this.geraTrilhaPrimeirosPassos = function() {
+
       var trilhaPrimeirosPassos = new Trilha("Trilha Primeiros Passos", {group: "primerios_passos"});
       trilhaPrimeirosPassos.adicionaRelacoes([ 
             new Relacao(cursoPraticandoLogica, cursoLogica),
@@ -23,24 +24,23 @@ function GeradorTrilhas() {
   var cursoJavaBibliotecas   = new Curso(id++, "Java E Suas \nBibliotecas");
   var cursoJavaBancoDeDados   = new Curso(id++, "JDBC E Banco De \nDados Em Java");
   var cursoJavaDesignPattern   = new Curso(id++, "Design Patterns Para \nBons Programadores");
-
+  var javaPP      = new Curso(id++, "Primeiros Passos \ncom Java");
+  var javaOO      = new Curso(id++, "Java E Orientação \nA Objetos");
+  var javaEclipse = new Curso(id++, "Eclipse: \nProdutividade Extrema");
+  var java8       = new Curso(id++, "Java 8");
+  
   this.geraTrilhaJava = function() {
-      //------------ Java
-      var javaPP      = new Curso(id++, "Primeiros Passos \ncom Java");
-      var javaOO      = new Curso(id++, "Java E Orientação \nA Objetos");
-      var javaEclipse = new Curso(id++, "Eclipse: \nProdutividade Extrema");
-      var java8       = new Curso(id++, "Java 8");
 
       var trilhaJava = new Trilha("Trilha Java", {group: 'java'});
       trilhaJava.adicionaRelacoes([
             new RelacaoCursoTrilha(javaPP, cursoPraticandoLogica),
             new Relacao(javaOO, javaPP),
             new Relacao(cursoJavaBibliotecas, javaOO),
-            new RelacaoCursoTrilha(cursoJavaBancoDeDados, cursoBancoSql),
             new Relacao(cursoJavaBancoDeDados, cursoJavaBibliotecas),
             new Relacao(cursoJavaDesignPattern, cursoJavaBibliotecas),
             new Relacao(javaEclipse, cursoJavaBibliotecas),
-            new Relacao(java8, cursoJavaBibliotecas)
+            new Relacao(java8, cursoJavaBibliotecas),
+            new RelacaoCursoTrilha(cursoJavaBancoDeDados, cursoBancoSql),
       ]);
       return trilhaJava;
   }
@@ -56,15 +56,14 @@ function GeradorTrilhas() {
   this.geraTrilhaJavaWeb = function() {
       var trilhaJavaWeb = new Trilha("Trilha Java para Web", {group: 'java_web'});
       trilhaJavaWeb.adicionaRelacoes([
+          new Relacao(jstl, cursoServlet),
+          new Relacao(vraptor4, vraptor3),
+          new Relacao(cursoJsf, cursoServlet),
+          new Relacao(springMVC, cursoServlet),
           new RelacaoCursoTrilha(cursoServlet, cursoJavaBibliotecas),
           new RelacaoCursoTrilha(cursoServlet, cursoPrimeirosPassosHtmlCss),
           new RelacaoCursoTrilha(vraptor3, cursoServlet),
-          new Relacao(jstl, cursoServlet),
-          new Relacao(vraptor4, vraptor3),
           new RelacaoCursoTrilha(cursoJpa, cursoJavaBancoDeDados),
-          new Relacao(cursoJsf, cursoServlet),
-          new Relacao(springMVC, cursoServlet),
-
       ]);
       return trilhaJavaWeb;
   }
@@ -85,18 +84,19 @@ function GeradorTrilhas() {
 
       var trilhaJavaAvancado = new Trilha("Trilha Java Avancado", {group: "java_avancado"});
       trilhaJavaAvancado.adicionaRelacoes([
-          new RelacaoCursoTrilha(cursoOOAprimorando, cursoJavaDesignPattern),
           new Relacao(dp2, cursoOOAprimorando),
-          new RelacaoCursoTrilha(jasper, cursoServlet),
-          new RelacaoCursoTrilha(xstream, cursoJavaBibliotecas),
-          new RelacaoCursoTrilha(ant, cursoServlet),
           new Relacao(ivy, ant),
           new Relacao(maven, ivy),
-          new RelacaoCursoTrilha(rest, cursoServlet),
           new Relacao(rest, xstream),
           new Relacao(solid, dp2),
-          new RelacaoCursoTrilha(ejb, cursoJpa),
           new Relacao(projetoJavaEE, ejb),
+
+          new RelacaoCursoTrilha(ant, cursoServlet),
+          new RelacaoCursoTrilha(rest, cursoServlet),
+          new RelacaoCursoTrilha(jasper, cursoServlet),
+          new RelacaoCursoTrilha(xstream, cursoJavaBibliotecas),
+          new RelacaoCursoTrilha(cursoOOAprimorando, cursoJavaDesignPattern),
+          new RelacaoCursoTrilha(ejb, cursoJpa),
           new RelacaoCursoTrilha(projetoJavaEE, cursoJsf)
       ]);
       return trilhaJavaAvancado;
@@ -144,6 +144,7 @@ function GeradorTrilhas() {
       var trilhaFront = new Trilha("Trilha HTML e Front End", {group: "front_end"});
       trilhaFront.adicionaRelacoes([
           new RelacaoCursoTrilha(introHtml, cursoPrimeirosPassosHtmlCss),
+
           new Relacao(cursoJavaScript, introHtml),
           new Relacao(cursoAvancandoNoHtmlCss, cursoJavaScript),
           new Relacao(jquery, cursoJavaScript),
@@ -169,11 +170,12 @@ function GeradorTrilhas() {
   this.geraTrilhaTestesSoftware = function() {
       var trilhaTestes = new Trilha("Trilha Testes de Software", {group: "testes"});
       trilhaTestes.adicionaRelacoes([
-            new RelacaoCursoTrilha(tdd, cursoOOAprimorando),
             new Relacao(mocks, tdd),
             new Relacao(testDao, mocks),
-            new RelacaoCursoTrilha(testDao, cursoJavaBancoDeDados),
             new Relacao(selenium, mocks),
+
+            new RelacaoCursoTrilha(tdd, cursoOOAprimorando),
+            new RelacaoCursoTrilha(testDao, cursoJavaBancoDeDados),
             new RelacaoCursoTrilha(selenium, cursoAvancandoNoHtmlCss),
             new RelacaoCursoTrilha(jasmine, cursoJavaScript)
       ]);
@@ -194,10 +196,11 @@ function GeradorTrilhas() {
       trilhaInfra.adicionaRelacoes([
             new Relacao(linux2, linux1),
             new Relacao(vagrant, linux2),  
-            new RelacaoCursoTrilha(vagrant, cursoServlet),
-            new RelacaoCursoTrilha(vagrant, cursoBancoSql),
             new Relacao(vagrant, ec2),
-            new Relacao(jenkins, git),       
+            new Relacao(jenkins, git),     
+
+            new RelacaoCursoTrilha(vagrant, cursoServlet),
+            new RelacaoCursoTrilha(vagrant, cursoBancoSql),  
             new RelacaoCursoTrilha(jenkins, maven),
             new RelacaoCursoTrilha(jenkins, selenium)     
       ]);
@@ -219,19 +222,23 @@ function GeradorTrilhas() {
   this.geraTrilhaCSharp = function() {
      var trilhaCSharp = new Trilha(" Trilha C# e .NET", {group: "csharp"});
       trilhaCSharp.adicionaRelacoes([
-            new RelacaoCursoTrilha(csharpFund, cursoPrimeirosPassosHtmlCss),
+           
             new Relacao(csharpOO, csharpFund),  
             new Relacao(csharpAvanc, csharpOO),
-            new RelacaoCursoTrilha(entityFr, cursoBancoSql),
             new Relacao(entityFr, csharpAvanc),
-            new RelacaoCursoTrilha(nhibernate, cursoBancoSql),
             new Relacao(nhibernate, csharpAvanc),
             new Relacao(aspMvc, csharpAvanc),       
             new Relacao(razor, aspMvc),
             new Relacao(csharpDP, csharpAvanc),  
             new Relacao(csharpDP2, csharpDP),
             new Relacao(csharpProjeto, entityFr),
-            new Relacao(csharpProjeto, aspMvc) 
+            new Relacao(csharpProjeto, aspMvc),
+            
+            new RelacaoCursoTrilha(csharpFund, cursoPraticandoLogica),
+            new RelacaoCursoTrilha(aspMvc, cursoPrimeirosPassosHtmlCss),
+            new RelacaoCursoTrilha(nhibernate, cursoBancoSql),
+            new RelacaoCursoTrilha(entityFr, cursoBancoSql)
+            
       ]);
       return trilhaCSharp;
   }

@@ -4,8 +4,8 @@
   <title>Alura - Mapa dos cursos</title>
   <meta charset="UTF-8">
 
-  <script src="js/modelo.js"></script>
-  <script src="js/gerador.js"></script>
+  <script type="text/javascript" src="js/modelo.js"></script>
+  <script type="text/javascript" src="js/gerador.js"></script>
   <script type="text/javascript" src="js/vis.min.js"></script>
 
   <link href="css/vis.css" rel="stylesheet" type="text/css" />
@@ -27,8 +27,8 @@
 <div id="mapa" style="width: 100%; overflow: hidden;">
 
 
-  <div id="menu" style="width: 200px; float: left;" >
-    <b>Eu quero me tornar um:</b>
+  <div id="menu" style="width: 250px; float: left;" >
+    <b>Torne-se o melhor:</b>
     <form onsubmit="submitForm(); return false;">
       <input type="radio" name="trilha" value="front"  onclick="submitForm(); return true;"> 
       Desenvolvedor Front-End
@@ -43,7 +43,7 @@
       <br />
 
       <input type="radio" name="trilha" value="ninja"  onclick="submitForm(); return true;"> 
-      Desenvolvedor Java Ninja
+      Desenvolvedor Java Avançado
       <br />
 
       <input type="radio" name="trilha" value="cert"  onclick="submitForm(); return true;">
@@ -68,7 +68,7 @@
     </form>
     <div id="selection"><br />Info:</div>
   </div>
-  <div id="treinamentos" style="margin-left: 200px;"></div>
+  <div id="treinamentos" style="margin-left: 250px;"></div>
 
 </div>
 
